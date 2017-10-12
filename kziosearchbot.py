@@ -5,7 +5,7 @@ import telebot
 API_TOKEN = '423472303:AAFLD7h1pPYAYVqe6CauuOwcnkDwKzihnyM'
 
 bot = telebot.TeleBot(API_TOKEN)
-bot.remove_webhook()
+
 
 @bot.message_handler(commands=['help', 'start'])
 def send_welcome(message):
