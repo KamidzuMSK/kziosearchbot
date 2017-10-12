@@ -19,6 +19,6 @@ def handle_t(message):
             r = requests.get('http://api.openweathermap.org/data/2.5/weather?&units=metric&q=%s&appid=0c9f3c052f1d81b7062750ff0926f345<img src="https://habrastorage.org/files/8fa/5f5/313/8fa5f5313b37438eb250b22cf041f2dd.png" alt="image"/>' % (city))
             data = r.json()
             temp = data["main"]["temp"]
-            bot.send_message(message.chat.id, 'Температура в ', city, ': ',temp , '°C')
+            bot.send_message(message.chat.id, "Температура в {}: {} C".format(city, temp))
 
 bot.polling(none_stop=True, interval=0)
