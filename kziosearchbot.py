@@ -3,19 +3,15 @@
 import telebot
 import config
 import requests
-<<<<<<< HEAD
 import datetime
 from telebot import types
-=======
 
->>>>>>> ea7d119fcea6fc2872716d8ede27a9eec55a7c61
 
 bot = telebot.TeleBot(config.token)
 
 
 @bot.message_handler(commands=["start"]) # Обработка /start
 def handle_start(message):
-<<<<<<< HEAD
         now = datetime.datetime.now()
         today = now.day
         hour = now.hour
@@ -98,17 +94,3 @@ def process_search_parameters_select(message):
 
 if __name__ == '__main__':
     bot.polling(none_stop=True)
-=======
-    bot.send_message(message.from_user.id, 'Hi! \nMy friend')
-
-@bot.message_handler(content_types=["text"])
-def handle_t(message):
-    if message.text[:7] == "Погода " or message.text[:7] == "погода " :
-            city = message.text[7:]
-            r = requests.get('http://api.openweathermap.org/data/2.5/weather?&units=metric&q=%s&appid=0c9f3c052f1d81b7062750ff0926f345<img src="https://habrastorage.org/files/8fa/5f5/313/8fa5f5313b37438eb250b22cf041f2dd.png" alt="image"/>' % (city))
-            data = r.json()
-            temp = data["main"]["temp"]
-            bot.send_message(message.chat.id, 'Температура в ', city, ': ',temp , '°C')
-
-bot.polling(none_stop=True, interval=0)
->>>>>>> ea7d119fcea6fc2872716d8ede27a9eec55a7c61
