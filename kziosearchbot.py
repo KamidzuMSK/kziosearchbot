@@ -31,7 +31,7 @@ def handle_start(message):
         
 def process_search_parameters_select(message):
         hide_markup = telebot.types.ReplyKeyboardRemove()
-        if message.text.encode('utf-8')=='Тестовый режим':
+        if message.text=='Тестовый режим':
            r = requests.get('http://map.kzn.ru/saumi_auction_xml/au_objects.json')
            data = r.json()
            date = data["data"][0]["AU_DATE"]
@@ -48,7 +48,7 @@ def process_search_parameters_select(message):
            target = data["data"][0]["AU_TARGET"]
            aulink = data["data"][0]["AU_LINKS"]
            keyboard = types.InlineKeyboardMarkup()
-           map_button = types.InlineKeyboardButton(text="Показать на карте", url="https://yandex.ru/maps/43/kazan/?mode=search&text={}".format(address.encode('utf-8').replace(' ', '')))
+           map_button = types.InlineKeyboardButton(text="Показать на карте", url="https://yandex.ru/maps/43/kazan/?mode=search&text={}".format(address.replace(' ', '')))
            url_button = types.InlineKeyboardButton(text="Посмотреть объявление", url="{}".format(aulink))
            if aulink != '':
                    keyboard.add(url_button)
@@ -57,8 +57,8 @@ def process_search_parameters_select(message):
            bot.send_message(message.chat.id, "Бот переключён в режим тестирования!\nПример вывода сведений об объекте.", reply_markup=hide_markup)
            bot.send_message(message.chat.id, "Дата и время аукциона: {} {}\nВид объекта: {}\nУсловия продажи: {}\nМестоположение объекта: {}\n\
 Координаты объекта: \nрайон: {}, адрес: {}\nКадастровый номер: {}\nСрок аренды: {} мес. Площадь: {} кв. м.\nСтартовая цена: {} руб.\nЦелевое назначение: {}\n\
-".format(date, time, objtype.encode('utf-8'), autype.encode('utf-8'), rmplan.encode('utf-8'), townarea.encode('utf-8'), address.encode('utf-8'), kadastrno, srok, square, stprice, target.encode('utf-8')), reply_markup=keyboard)
-        elif message.text.encode('utf-8')=='Начать работу':
+".format(date, time, objtype, autype, rmplan, townarea, address, kadastrno, srok, square, stprice, target), reply_markup=keyboard)
+        elif message.text=='Начать работу':
            bot.send_message(message.chat.id, "Бот находится в стадии разработки или отладки. Попробуйте, пожалуйста, позднее.", reply_markup=hide_markup)    
 ##           kbd = types.ReplyKeyboardMarkup(one_time_keyboard = True, resize_keyboard = True)
 ##           kbd.add('Дата торгов','Время торгов', 'Вид объекта', 'Условия продажи', 'Местоположение', 'Район', 'Адрес', 'Кадастровый №', 'Срок аренды', 'Общая площадь', 'Стартовая цена')
